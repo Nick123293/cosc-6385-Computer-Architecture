@@ -163,9 +163,10 @@ public:
           return &u;
         }
 
-        void update (pm_update *u, bool taken, unsigned int target, unsigned int ip) {
+        void update (branch_update *u_base, bool taken, unsigned int target) {
           if (bi.br_flags & BR_CONDITIONAL)
           {
+            pm_update *u = static_cast<pm_update *>(u_base);
             //update global history
             global_history <<=1;
             global_history |=taken;
@@ -193,11 +194,11 @@ public:
               if (taken)
               {
                 //if not already at strongly taken, increment by 1
-                if(bimodal_table[downcast_val_12(ip)]<2){bimodal_table[downcast_val_12(ip)]++;}
+                if(bimodal_table[downcast_val_12(bi.address)]<2){bimodal_table[downcast_val_12(bi.address)]++;}
               }
               else{
                 //if not already at strongly not taken, decrement by 1
-                if(bimodal_table[downcast_val_12(ip)]>-1){bimodal_table[downcast_val_12(ip)]--;}
+                if(bimodal_table[downcast_val_12(bi.address)]>-1){bimodal_table[downcast_val_12(bi.address)]--;}
               }
               if (u->bimodal_prediction!=taken){
                 bool replacement_way;

@@ -3,7 +3,7 @@
 \usepackage{amsmath}
 \usepackage{listings}
 \usepackage{graphicx}
-\begin{document}
+\usepackage[hidelinks]{hyperref}\begin{document}
 \begin{center}
 \textbf{\large COSC 6385 - Homework 1: Branch Prediction} \\
 
@@ -21,9 +21,13 @@ To do this we make moifications to the \textbf{pm\_predictor} class located in \
 Initially, the prediction is set to simply always predict that a branch is not taken. This results in an average MPKI of 86.311 across all given test data.
 
 \section{My Solution}
+My code can be found at \cite{CA_github}, which is the github repository containing my homework solutions. 
 \begin{enumerate}
   \item Implement bimodal prediction, of which there is no ambiguity in the problem statements
   \item Implement global prediction, of which there is an ambiguity of the replacement policy, and whether the use of the a global history vector is required. I used LRU as my replacement policy, and no global history vector
   \item The branch prediction is based off of only one prediction, depending on whether there is a hit in the global prediction buffer or not. For this reason, the bimodal 2bc is only updated on a global prediction buffer miss. The global prediction buffer 2bc is always updated, since on a miss a tag is replaced and the counter is reset to either weakly taken or weakly not taken.
 \end{enumerate}
+
+\bibliographystyle{plain}
+\bibliography{hw1-report}
 \end{document}

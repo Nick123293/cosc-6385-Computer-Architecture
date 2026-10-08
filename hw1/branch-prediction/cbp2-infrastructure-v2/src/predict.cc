@@ -29,7 +29,7 @@ int main (int argc, char *argv[]) {
 
 	// initialize competitor's branch prediction code
 
-	pm_predictor *p = new pm_predictor ();
+	branch_predictor *p = new pm_predictor ();
 
 	// some statistics to keep, currently just for conditional branches
 
@@ -52,7 +52,7 @@ int main (int argc, char *argv[]) {
 		// send this trace to the competitor's code for prediction
 
 		
-    pm_update *u = p->predict (t->bi); 
+    branch_update *u = p->predict (t->bi); 
 		// collect statistics for a conditional branch trace
 
 		if (t->bi.br_flags & BR_CONDITIONAL) {
@@ -63,7 +63,7 @@ int main (int argc, char *argv[]) {
 			tmiss += u->target_prediction () != t->target;
       
 		}
-    p->update (u, t->taken, t->target, t->bi.address);
+    p->update (u, t->taken, t->target);
 		// update competitor's state
 
 		
