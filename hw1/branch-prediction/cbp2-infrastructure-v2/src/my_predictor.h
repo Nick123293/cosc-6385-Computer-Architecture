@@ -69,20 +69,13 @@ public:
         bool gp_hit;
         bool gp_way;
         uint8_t tag_for_replace;
+        bool bimodal_prediction;
 };
 
 class pm_predictor : public branch_predictor {
 public:
         pm_update u;
-
-        pm_predictor (void) {
-
-
-          //Bimodal predictor
-
-          //Global predictor
-        }
-
+        branch_info bi;
         //mask with BIMODAL_TABLE_BITS (12) trailing bits set to 1, for parsing trailing bits from instruction address 
         static const size_t bimodal_table_mask = (1U << BIMODAL_TABLE_BITS)-1;
         static uint16_t downcast_val_12(unsigned int val)
@@ -111,79 +104,115 @@ public:
           return stored==tag; //true if either match
         }
         // std::array<int16_t, GLOBAL_TABLE_SIZE> global_table{}; //6 bit tag, 2 bit counter: 2 ways gives 16 bits
-        uint16_t global_history; //16 bits to fit 9
+        uint16_t global_history = 0; //16 bits to fit 9
         std::array<bool, GLOBAL_TABLE_SIZE> lru{}; //lru for tag replacement
+        pm_predictor (void) {
+
+
+          //Bimodal predictor
+
+          //Global predictor
+        }
+
+
         
         
 
         pm_update *predict (branch_info & b) {
-          //bimodal_table_mask is 0x0FFF, result of bitwise AND can be safely downcast
-          uint16_t ip_12 = downcast_val_12(b.address);
-          uint16_t ip_14 = downcast_val_15(b.address);
-          uint8_t tag = static_cast<uint8_t>(ip_14 & tag_mask);
-          uint16_t index = (ip_14 & index_mask)>>6; //right shift by 6 to start index at lowest bit
-
-          // uint16_t global_table_index=ip_9 ^ global_history; //XOR
-          bool prediction;
-          bool global_prediction_hit=true;
-          bool gp_way=0;
-          //check for global prediction hit
-          if (compare_tag(index, 0, tag)){ //way0 hit
-            prediction=(two_way_global_table[index][0]&twobc_mask)>1? 1:0;
-            lru[index]=1;
-            gp_way=0;
+          bi=b;
+          if (b.br_flags & BR_CONDITIONAL)
+          {
+            //bits [14:6] of the instruction address
+            uint16_t pc_index=(b.address >> 6)&0x1FF;
+            //XOR between instruction address and history to get index
+            uint16_t index = pc_index ^ (global_history & 0x1FF);
+            // uint16_t ip_15 = downcast_val_15(b.address);
+            uint8_t tag = static_cast<uint8_t>(pc_index & tag_mask);
+            bool prediction;
+            bool global_prediction_hit=true;
+            bool gp_way=0;
+            //check for global prediction hit
+            bool bimodal_prediction = bimodal_table[b.address & 0xFFF]>0;
+            u.bimodal_prediction=bimodal_prediction;
+            if (compare_tag(index, 0, tag)){ //way0 hit
+              prediction=(two_way_global_table[index][0]&twobc_mask)>1;
+              lru[index]=1;
+              gp_way=0;
+            }
+            else if(compare_tag(index, 1, tag)){
+              prediction=(two_way_global_table[index][1]&twobc_mask)>1;
+              lru[index]=0;
+              gp_way=1;
+            }
+            else{
+              prediction = bimodal_prediction; //return 1 if value is >0, 0 if value <=0
+              global_prediction_hit=false;
+            }
+            // predict branch outcome
+            u.direction_prediction (prediction);
+        
+            // predict branch target address
+            u.gp_hit=global_prediction_hit;
+            u.gp_way=gp_way;
+            u.tag_for_replace=tag;
+            u.index=index;
           }
-          else if(compare_tag(index, 1, tag)){
-            prediction=(two_way_global_table[index][1]&twobc_mask)>1? 1:0;
-            lru[index]=0;
-            gp_way=1;
-          }
-          else{
-            prediction = bimodal_table[ip_12] > 0? 1:0; //return 1 if value is >0, 0 if value <=0
-            global_prediction_hit=false;
-          }
-			    // predict branch outcome
-          u.direction_prediction (prediction);
-			
-			    // predict branch target address
+          else{u.direction_prediction (true);}
           u.target_prediction (0);
-          u.gp_hit=global_prediction_hit;
-          u.gp_way=gp_way;
-          u.tag_for_replace=tag;
-			    return &u;
+          return &u;
         }
 
         void update (pm_update *u, bool taken, unsigned int target, unsigned int ip) {
-          uint16_t gt_index = (downcast_val_15(ip) & index_mask)>>6;
-          if (u->gp_hit){ //global table hit, update global table
-            if(taken){
-              if((two_way_global_table[gt_index][u->gp_way]&twobc_mask)==3){}
-              else{two_way_global_table[gt_index][u->gp_way]+=1;}
+          if (bi.br_flags & BR_CONDITIONAL)
+          {
+            //update global history
+            global_history <<=1;
+            global_history |=taken;
+            global_history &=0x1FFF;
+            uint16_t gt_index = u->index;
+            if (u->gp_hit){ //global table hit, update global table
+              bool global_prediction=u->direction_prediction();
+              if(global_prediction!=taken && u->bimodal_prediction == taken)
+              {
+                global_valid[gt_index][u->gp_way]=false;
+              }
+              else{
+                uint8_t &entry = two_way_global_table[gt_index][u->gp_way];
+                uint8_t counter = entry & twobc_mask;
+                if(taken){
+                  if(counter<3){counter++;}
+                }
+                else{
+                  if(counter > 0){counter--;}
+                }
+                entry = (entry & ~twobc_mask) | counter;
+              }
             }
-            else{
-              if((two_way_global_table[gt_index][u->gp_way]&twobc_mask)==0){}
-              else{two_way_global_table[gt_index][u->gp_way]-=1;}
+            else{ //bimodal update & global tag update
+              if (taken)
+              {
+                //if not already at strongly taken, increment by 1
+                if(bimodal_table[downcast_val_12(ip)]<2){bimodal_table[downcast_val_12(ip)]++;}
+              }
+              else{
+                //if not already at strongly not taken, decrement by 1
+                if(bimodal_table[downcast_val_12(ip)]>-1){bimodal_table[downcast_val_12(ip)]--;}
+              }
+              if (u->bimodal_prediction!=taken){
+                bool replacement_way;
+                //If the bimodal prediction was also wrong, then replace global bufer
+                //If one of the ways has never been filled, fill that one first
+                if (!global_valid[gt_index][0]){replacement_way=0;}
+                else if (!global_valid[gt_index][1]){replacement_way=1;}
+                //If both are valid, fill based on LRU
+                else {replacement_way=lru[gt_index];}
+                uint8_t counter = taken ? 2:1;
+                two_way_global_table[gt_index][replacement_way]=(u->tag_for_replace<<2) | counter;
+                global_valid[gt_index][replacement_way]=true;
+                lru[gt_index]=!replacement_way;
+              }
+
             }
-            
-          }
-          else{ //bimodal update & global tag update
-            if (taken)
-            {
-              if(bimodal_table[downcast_val_12(ip)]==2){} //if already at strongly taken, do not increment
-              else{bimodal_table[downcast_val_12(ip)]+=1;} //else increment by 1
-              two_way_global_table[gt_index][lru[gt_index]] = (u->tag_for_replace << 2)+2; //set counter to weakly taken
-              global_valid[gt_index][lru[gt_index]]=true;
-              lru[gt_index]=!lru[gt_index];
-            }
-            else{
-              if(bimodal_table[downcast_val_12(ip)]==-1){} //if already at strongly not taken, do not decrement
-              else{bimodal_table[downcast_val_12(ip)]-=1;} //else decrement by 1
-              two_way_global_table[gt_index][lru[gt_index]] = (u->tag_for_replace << 2)+1; //set counter to weakly not taken
-              global_valid[gt_index][lru[gt_index]]=true; //global table vlue is no longer cold
-              lru[gt_index]=!lru[gt_index];
-            }
-            
-            //
           }
           // printf("taken? %d\n", taken);
           // printf("bimodal_table value: %d\n", bimodal_table[downcast_ip(ip)]);

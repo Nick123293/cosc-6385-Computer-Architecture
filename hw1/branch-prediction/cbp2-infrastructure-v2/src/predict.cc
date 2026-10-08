@@ -52,22 +52,18 @@ int main (int argc, char *argv[]) {
 		// send this trace to the competitor's code for prediction
 
 		
-
+    pm_update *u = p->predict (t->bi); 
 		// collect statistics for a conditional branch trace
 
 		if (t->bi.br_flags & BR_CONDITIONAL) {
-      /*
-      By only predicting on only branch conditions, we remove the possibility of 
-      updating the tables unnecessarily. This lowers average MKPI by ~0.5.
-      */
-      pm_update *u = p->predict (t->bi); 
+      
 			dmiss += u->direction_prediction () != t->taken;
 			// count a target misprediction
 
 			tmiss += u->target_prediction () != t->target;
-      p->update (u, t->taken, t->target, t->bi.address);
+      
 		}
-
+    p->update (u, t->taken, t->target, t->bi.address);
 		// update competitor's state
 
 		
