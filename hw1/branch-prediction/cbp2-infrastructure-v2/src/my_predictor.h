@@ -123,11 +123,12 @@ public:
           if (b.br_flags & BR_CONDITIONAL)
           {
             //bits [14:6] of the instruction address
-            uint16_t pc_index=(b.address >> 6)&0x1FF;
+            uint16_t pc_index=(b.address >> 6) & 0x1FF;
             //XOR between instruction address and history to get index
-            uint16_t index = pc_index ^ (global_history & 0x1FF);
+            uint16_t index = pc_index ^ (global_history>>6 & 0x1FF);
             // uint16_t ip_15 = downcast_val_15(b.address);
-            uint8_t tag = static_cast<uint8_t>(pc_index & tag_mask);
+            uint8_t tag_premask = static_cast<uint8_t>(b.address & tag_mask);
+            uint8_t tag = tag_premask ^ static_cast<uint8_t>(global_history & tag_mask);
             bool prediction;
             bool global_prediction_hit=true;
             bool gp_way=0;
@@ -168,7 +169,7 @@ public:
             //update global history
             global_history <<=1;
             global_history |=taken;
-            global_history &=0x1FFF;
+            global_history &=0x7FFF;
             uint16_t gt_index = u->index;
             if (u->gp_hit){ //global table hit, update global table
               bool global_prediction=u->direction_prediction();
