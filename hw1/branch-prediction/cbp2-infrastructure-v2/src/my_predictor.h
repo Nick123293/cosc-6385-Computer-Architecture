@@ -90,8 +90,7 @@ public:
         //init bimodal table
         inline static uint8_t two_way_global_table[GLOBAL_TABLE_SIZE][2] = {};
         inline static bool global_valid[GLOBAL_TABLE_SIZE][2] = {}; //valid bits for global table
-        std::array<int8_t, BIMODAL_TABLE_SIZE> bimodal_table{0}; //uint8_t since value is 2 bits
-        
+        std::array<int8_t, BIMODAL_TABLE_SIZE> bimodal_table{}; //uint8_t since value is 2 bits
         //init global predictor table
         // static const uint16_t top_8_bits = 0xFF00; //way0 mask
         // static const uint16_t bottom_8_bits = 0x00FF; //way1 mask
@@ -133,7 +132,7 @@ public:
             bool global_prediction_hit=true;
             bool gp_way=0;
             //check for global prediction hit
-            bool bimodal_prediction = bimodal_table[b.address & 0xFFF]>0;
+            bool bimodal_prediction = bimodal_table[b.address & 0xFFF]>=0;
             u.bimodal_prediction=bimodal_prediction;
             if (compare_tag(index, 0, tag)){ //way0 hit
               prediction=(two_way_global_table[index][0]&twobc_mask)>1;
@@ -194,11 +193,11 @@ public:
               if (taken)
               {
                 //if not already at strongly taken, increment by 1
-                if(bimodal_table[downcast_val_12(bi.address)]<2){bimodal_table[downcast_val_12(bi.address)]++;}
+                if(bimodal_table[downcast_val_12(bi.address)]<1){bimodal_table[downcast_val_12(bi.address)]++;}
               }
               else{
                 //if not already at strongly not taken, decrement by 1
-                if(bimodal_table[downcast_val_12(bi.address)]>-1){bimodal_table[downcast_val_12(bi.address)]--;}
+                if(bimodal_table[downcast_val_12(bi.address)]>-2){bimodal_table[downcast_val_12(bi.address)]--;}
               }
               if (u->bimodal_prediction!=taken){
                 bool replacement_way;

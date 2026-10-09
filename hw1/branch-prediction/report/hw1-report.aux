@@ -17,10 +17,35 @@
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
 \citation{CA_github}
-\bibstyle{plain}
-\bibdata{hw1-report}
-\bibcite{CA_github}{1}
+\citation{medium_bimodal_branch_predictor}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Problem Statement}{1}{section.1}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2}Preliminary Results}{1}{section.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Trace MPKI results using the sample gshare output, which uses a table size of $2^{15}$.}}{1}{figure.1}\protected@file@percent }
+\newlabel{fig:gshare_output}{{1}{1}{Trace MPKI results using the sample gshare output, which uses a table size of $2^{15}$}{figure.1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {3}My Solution}{1}{section.3}\protected@file@percent }
-\gdef \@abspage@last{2}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Bimodal Predictor}{1}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Two-bit Counter}{1}{subsubsection.3.1.1}\protected@file@percent }
+\newlabel{sec:twobc}{{3.1.1}{1}{Two-bit Counter}{subsubsection.3.1.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Bimodal Table Implementation}{2}{subsubsection.3.1.2}\protected@file@percent }
+\newlabel{sec:dt:impl}{{3.1.2}{2}{Bimodal Table Implementation}{subsubsection.3.1.2}{}}
+\citation{medium_gshare_branch_predictor}
+\citation{gpt_global_predictor_hit_decision}
+\citation{gpt_global_branch_prediction}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Trace MPKI results using only bimodal prediction with a 2-bit counter and a table size of $2^{12}$.}}{3}{figure.2}\protected@file@percent }
+\newlabel{fig:bimodal_output}{{2}{3}{Trace MPKI results using only bimodal prediction with a 2-bit counter and a table size of $2^{12}$}{figure.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Global Predictor}{3}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Global Predictor Implementation}{3}{subsubsection.3.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.2}Global Predictor \& Bimodal Table Results}{3}{subsubsection.3.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Final results with both the bimodal and global precition tables.}}{4}{figure.3}\protected@file@percent }
+\newlabel{fig:final_results}{{3}{4}{Final results with both the bimodal and global precition tables}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Updating the Tables}{4}{subsection.3.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces chatGPT generated diagram describing the table updating policy. 'train' corresponds to updating the 2-bit counter, and 'evict' corresponds to replacing the tag in the global table.}}{4}{figure.4}\protected@file@percent }
+\newlabel{fig:table_update_policy}{{4}{4}{chatGPT generated diagram describing the table updating policy. 'train' corresponds to updating the 2-bit counter, and 'evict' corresponds to replacing the tag in the global table}{figure.4}{}}
+\bibstyle{plain}
+\bibdata{hw1-report}
+\bibcite{gpt_global_branch_prediction}{1}
+\bibcite{gpt_global_predictor_hit_decision}{2}
+\bibcite{CA_github}{3}
+\bibcite{medium_bimodal_branch_predictor}{4}
+\bibcite{medium_gshare_branch_predictor}{5}
+\gdef \@abspage@last{5}

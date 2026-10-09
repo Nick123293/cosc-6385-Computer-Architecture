@@ -1,33 +1,123 @@
-\documentclass[12pt]{article}
+\documentclass[12pt, twocolumn]{article}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath}
-\usepackage{listings}
-\usepackage{graphicx}
-\usepackage[hidelinks]{hyperref}\begin{document}
-\begin{center}
-\textbf{\large COSC 6385 - Homework 1: Branch Prediction} \\
+\usepackage{listings} % for code
+\usepackage{xcolor} % for code
+\lstset{ %provides color for code
+    language=C++,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    identifierstyle=\color{black},
+    showstringspaces=false
+}
+\lstMakeShortInline[language=C++]| %allows inline code blocks defined with |your code|
+\usepackage{graphicx} %For including figures
+\usepackage[hidelinks]{hyperref} %Makes links clickable
+\usepackage{enumitem} %Allows [nosep] for enumerate blocks to have no link separation
+% \lstnewenvironment{cpp}
+% {
+%   \lstset{language=C++}
+% }{}
+% \lstMakeShortInline[langague=C++]
 
-Nicholas Anderson\\
-\vspace{0.1in}
-\end{center}
+% \newcommand{\cpp}[1]{%
+%   \begin{lstlisting}%
+%     #1%
+%   \end{lstlisting}%
+% }
+\begin{document}
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \begin{center}
+    \textbf{\large COSC 6385 - Homework 1: Branch Prediction} \\
+
+    Nicholas Anderson\\
+    \vspace{0.1in}
+    \end{center}
+  \end{@twocolumnfalse}
+]
+\hspace*{2cm}
 \section{Problem Statement}
-For this homework we have been tasked with creating a branch prediction class in c++. Template code was given, of which the important methods are its ability to read instructions and identify branch statements. We are given a multitude of different traces, and by using the \textit{run} command we can find the average mispredictions-per-1000-instructions (MPKI) across all given traces.
 
-We were tasked with implementing \textit{branch outcome prediction} using a two-way global predictor, and a bimodal predictor. We were not required to implement loop prediction or branch target prediction. Essentially, we use a bimodal table, and a two-way global predictor to predict whether a branch will be true or not. Additionally, implementation of the path information register (PIR) and the hash access function was not required for the global predictor.
+For this homework we have been tasked with creating a branch prediction class in c++. Template code was given, of which the important methods are its ability to read instructions and identify branch statements. We are given a multitude of different traces, and by using the \textit{run} command we can find the average mispredictions-per-1000-instructions (MPKI) across all given traces. 
 
-To do this we make moifications to the \textbf{pm\_predictor} class located in \textbf{my\_predictor.h} header file. Though as I will discuss later, I found it useful to modify other portions of the code as well for my implementation. 
+We were tasked with implementing \textit{branch outcome prediction} using a two-way global predictor, and a bimodal predictor. We were not required to implement loop prediction or branch target prediction. Essentially, we use a bimodal table, and a two-way global predictor to predict whether a branch will be true or not. Additionally, implementation of the path information register (PIR) and the hash access function was not required for the global predictor. To do this we make moifications to the |pm_predictor| class located in \textbf{my\_predictor.h} header file.
 
 \section{Preliminary Results}
-Initially, the prediction is set to simply always predict that a branch is not taken. This results in an average MPKI of 86.311 across all given test data.
+Initially, the prediction is set to simply always predict that a branch is not taken. This results in an average MPKI of 86.311 across all given test data. The sample code also comes with the |gshare_predictor| class which acheives an average MPKI of 6.305, the output can be seen in figure \ref{fig:gshare_output}.
+\begin{figure}[htbp]
+    \centering % Centers the image on the page
+    \includegraphics[width=0.48\textwidth]{figures/gshare_output.png} % Do not include the file extension (.png/.jpg)
+    \caption{Trace MPKI results using the sample gshare output, which uses a table size of $2^{15}$.}
+    \label{fig:gshare_output} % Used to reference this image in the text
+\end{figure}
 
 \section{My Solution}
 My code can be found at \cite{CA_github}, which is the github repository containing my homework solutions. 
-\begin{enumerate}
-  \item Implement bimodal prediction, of which there is no ambiguity in the problem statements
-  \item Implement global prediction, of which there is an ambiguity of the replacement policy, and whether the use of the a global history vector is required. I used LRU as my replacement policy, and no global history vector
-  \item The branch prediction is based off of only one prediction, depending on whether there is a hit in the global prediction buffer or not. For this reason, the bimodal 2bc is only updated on a global prediction buffer miss. The global prediction buffer 2bc is always updated, since on a miss a tag is replaced and the counter is reset to either weakly taken or weakly not taken.
+\subsection{Bimodal Predictor}
+For my implementation I created a bimodal table which has 4096 entries, with each entry having a 2-bit counter. For my implementation I heavily referenced an online article \cite{medium_bimodal_branch_predictor}. Implementation details can be found in section \ref{sec:dt:impl}.
+\subsubsection{Two-bit Counter} \label{sec:twobc}
+Since a 2-bit counter comes up in global prediction as well it is worth giving an explanation of its functionality. A 2-bit counter is exactly what it sounds like, a counter which is 2 bits. The purpose of this counter is to determine what the branch prediction will be. The 4 possible states of a 2-bit counter are:
+\begin{enumerate}[nosep]
+  \item[] \textbf{00}: Strongly not taken
+  \item[] \textbf{01}: Weakly not not taken
+  \item[] \textbf{10}: Weakly taken
+  \item[] \textbf{11}: Strongly taken
 \end{enumerate}
+Not taken states correspond to the a 'false' prediction, while taken states correspond to a 'true' prediction. Note that terminology is easy to confuse here: a 'false' prediction does not mean the branch predictor was incorect, but that the predictor is predicting that the condition will be false. If the condition is false in this case, then a predictor predicting 'false' is a correct prediction. The opposite is the case for 'true' predictions. I will try my best in the report to denote predictions as either true or false, and whether they were correct as correct or incorrect
 
-\bibliographystyle{plain}
-\bibliography{hw1-report}
+Having a 2-bit counter allows branch prediction to change its stage on incorrect predictions, but not always between a true and false prediction. For bimodal prediction, after a prediction the counter state is updated, depending on the result of the prediction. For example we look at a true prediction (i.e. branch predictor predicts true). If this prediction is correct then the 1 is added to the counter, if it is incorrect then 1 is subtracted from the counter. For a false prediction, 1 is subtracted on a correct prediction and added on an incorrect one. If the counter state is already at 11 or 00 and 1 is added or subtracted respectively, then the counter is not updated. This implementation allows for predictions to be incorrect, and the state to be updated in a way where it will make the same prediction, which can prove useful for many patterns.
+
+Take a common nested for loop pattern where a for loop of size 2 is repeated indefinitely. The resulting branch pattern would look like:(T T F T T F T T F...). Assuming a one bit counter that starts with true, the first 2 trues would be predicted correctly, then the false would be a misprediction. On the misprediction the counter would change to false, then mispredict the next true as well, finally it would predict the 5th prediction correctly as true, then the 6th and 7th prediction incorrectly. This pattern would maintain for the rest of the pattern, resulting in an asymptotical prediction accuraccy of 33\% (predicts the first true incorrectly, the second true correctly, and the false incorrectly). With a 2-bit counter we can increase the accuracy to 66\%. We start at \textbf{10}, weakly taken. The first prediction is true so the counter is incremented to strongly true \textbf{11}, strongly taken. The second prediction is also true, but the counter is already \textbf{11} so we remain at strongly taken. On the first false prediction we have a misprediction, so we decrement our counter to \textbf{10}. However, we are still at weakly taken, so unlike the 1-bit counter we predict correctly (true) on the 4th prediction. In this scenario we continue to correctly predict all true values and incorrectly predict all false values, giving us asymptotical accuracy of 66\%.
+\subsubsection{Bimodal Table Implementation} \label{sec:dt:impl}
+As stated earlier, loop branch prediction is not required, so the bimodal prediction outcome is simply the value from the leftmost bit from the 2-bit counter. Each table entry contains its own 2-bit counter. To find which table entry we examine for prediction, we take trailing bits from the instruction pointer (IP) address equal to $log_2(\text{Bimodal Table Size})$. In our implemenation we have a bimodal table size of 4096, so we take the 12 trailing (rightmost) bits from the instruction pointer. The table is implemented as an std::array of type |int8_t| (for simplicity the above examples relate to |uint8_t|, signed integers can be implemented just as easily). I use |int8_t| as that is the simplest method to implement a 2-bit variable while wasting minimal space, and it allows an initializtion to weakly true by simply invoking:
+
+\noindent|array<int8_t, size> bimodal_table{};|
+
+\noindent In my implementation values are always checked before they are incremented to ensure the 2bc value always remains between -2 and 1. All values are initialized as 0, which corresponds to a weakly taken state. Using only the bimodal table for prediction, my results indicate an average MPKI of 10.267, which can be seen in figure \ref{fig:bimodal_output}. 
+\begin{figure}[htbp]
+    \centering % Centers the image on the page
+    \includegraphics[width=0.48\textwidth]{figures/bimodal_table_output.png}
+    \caption{Trace MPKI results using only bimodal prediction with a 2-bit counter and a table size of $2^{12}$.}
+    \label{fig:bimodal_output} % Used to reference this image in the text
+\end{figure}
+
+\subsection{Global Predictor}
+For this assignment we implement a 2-way global predictor, with each 512 elements each way. As described in the assignment, we are not required to implement the PIR or a hashing function. We use a global history vector of 15 bits to keep track of recent branch paths, allowing us to retain information on the past 15 paths. To find the global predictor table entry, we take bits [14:6] of the instruction pointer (inclusive), and perform a bitwise XOR operation with bits [14:6] of the global history vector. This value is the index we examine inside the global table. A tag is also created and stored inside the global table, its value being the result of a bitwise XOR between [5:0] of the instruction pointer and the global history. This value is used to determine whether there is a global predictor hit. If the tag inside the global predictor table at the index matches the tag from the branch condition, for any way, then we determine that there is a global predictor hit and we use the 2-bit counter from this table to determine our prediction. If the tag does not match the value in any way, then we fall back to the bimodal table. Each way contains its own tag. My implementation was heavily based off of a medium article \cite{medium_gshare_branch_predictor} and a two chatGPT interactionsI had with GPT 5.6 \cite{gpt_global_predictor_hit_decision} \cite{gpt_global_branch_prediction}.
+\subsubsection{Global Predictor Implementation}
+For implementing the global table we initialize a 2-dimensional array (i.e. matrix) like so:
+
+\noindent|uint8_t two_way_global_table[512][2];|
+
+\noindent Each value is a 8 bit unsigned int, with the leading 6 bits used to contain the tag, and the 2 trailing bits containing the 2-bit counter. To perform operations on these we use bitmasks of |0x3F| and |0x3| respectively. Additionally we utilize a global valid table:
+
+\noindent|uint8_t global_valid[512][2]={};|
+
+\noindent with all values initialized at 0. This stops the global predictor table from initially using an unallocated prediction if the tag happens to match the uninitialized (garbage) value in |two_way_global_table|.
+\subsubsection{Global Predictor \& Bimodal Table Results}
+With both branch prediction tables implemented, we see a MPKI of 6.557. The full output can be seen in figure \ref{fig:final_results}. When compared to the |gshare_predictor| class, we see that we have a worse MPKI of ~.25. While our results our slightly worse, it is important to note that our total table size is $512*2 + 4096=5120$ while the |gshare_predictor| has a table size of 32768, which is 6.4$\times$ larger. In contrast, our MPKI 1.04$\times$ larger. This shows that using both tables allows you to save table space while having similar MPKI compared to just using a global predictor table (which is what |gshare_predictor| implements).
+\begin{figure}[htbp]
+    \centering % Centers the image on the page
+    \includegraphics[width=0.48\textwidth]{figures/final_results_output.png}
+    \caption{Final results with both the bimodal and global precition tables.}
+    \label{fig:final_results} % Used to reference this image in the text
+\end{figure}
+
+\subsection{Updating the Tables}
+\begin{figure}[htbp]
+    \centering % Centers the image on the page
+    \includegraphics[width=0.48\textwidth]{figures/table_update_gpt.png}
+    \caption{chatGPT generated diagram describing the table updating policy. 'train' corresponds to updating the 2-bit counter, and 'evict' corresponds to replacing the tag in the global table.}
+    \label{fig:table_update_policy} % Used to reference this image in the text
+\end{figure}
+Figure \ref{fig:table_update_policy} describes our tabe update policy. We do not update both tables every instruction. Firstly, tables are only updated on a branch instruction. If the instruction is not a branch condition, then we automatically set branch prediction to true and perform no update. Secondly, we do not update the bimodal table when there is a global predictor hit, as the global table is used. On a global table hit, whichever way had the hit, we increment or decrement the counter in the same way as the bimodal table (described in section \ref{sec:twobc}). On a global table miss, we update the 2-bit counter in the global table. On a global table miss we update the 2-bit counter in the bimodal table based on whether the branch was taken or not. If the bimodal table prediction was incorrect (on a global table miss), then we allocate the tag and initialize the 2-bit counter in the global table. When a tag is replaced in the global table, we reinitialize the counter to be either weakly taken or weakly not taken, based on whether the path was taken or not. 
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \bibliographystyle{plain}
+    \bibliography{hw1-report}
+  \end{@twocolumnfalse}
+]
+
 \end{document}

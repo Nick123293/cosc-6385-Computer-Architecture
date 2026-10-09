@@ -1,10 +1,42 @@
 \begin{thebibliography}{1}
 
+\bibitem{gpt_global_branch_prediction}
+chatGPT.
+\newblock chatgpt conversation about implementing a global branch predictor.
+\newblock
+  \url{https://chatgpt.com/g/g-p-6ab56d61a49c8191b907e193b870ee6d-cosc-6385-ca/c/6ac6a5e8-1c90-83e9-80e9-1b87a2f6ae5d},
+  2026.
+\newblock Accessed: 10-8-2026.
+
+\bibitem{gpt_global_predictor_hit_decision}
+chatGPT.
+\newblock chatgpt global prediction hit decision conversation.
+\newblock
+  \url{https://chatgpt.com/g/g-p-6ab56d61a49c8191b907e193b870ee6d-cosc-6385-ca/c/6ac69114-8ae8-83ea-aa39-24e3d0adf02d},
+  2026.
+\newblock Accessed: 10-8-2026.
+
 \bibitem{CA_github}
 Nick123293.
 \newblock cosc-6385-computer-architecture.
 \newblock \url{https://github.com/Nick123293/cosc-6385-Computer-Architecture},
   2026.
+\newblock Accessed: 10-8-2026.
+
+\bibitem{medium_bimodal_branch_predictor}
+The Arch Bytes: From~Core to~Code.
+\newblock Bimodal branch predictor.
+\newblock
+  \url{https://medium.com/@himanshu0525125/bimodal-branch-predictor-b20b8c31850c},
+  2024.
+\newblock Accessed: 10-8-2026.
+
+\bibitem{medium_gshare_branch_predictor}
+The Arch Bytes: From~Core to~Code.
+\newblock Gshare branch predictor.
+\newblock
+  \url{https://medium.com/@himanshu0525125/global-history-branch-predictor-0eddb6bdd001},
+  2024.
 \newblock Accessed: 10-8-2026.
 
 \end{thebibliography}
