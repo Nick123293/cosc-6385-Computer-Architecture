@@ -41,7 +41,7 @@
 \hspace*{2cm}
 \section{Problem Statement}
 
-For this homework we have been tasked with creating a branch prediction class in c++. Template code was given, of which the important methods are its ability to read instructions and identify branch statements. We are given a multitude of different traces, and by using the \textit{run} command we can find the average mispredictions-per-1000-instructions (MPKI) across all given traces. 
+For this homework we have been tasked with creating a branch prediction class in c++. Template code was given, of which the important methods are its ability to read instructions and identify branch statements. We are given a multitude of different traces, and by using the \textit{run} command we can find the average mispredictions-per-1000-instructions (MPKI) across all given traces.
 
 We were tasked with implementing \textit{branch outcome prediction} using a two-way global predictor, and a bimodal predictor. We were not required to implement loop prediction or branch target prediction. Essentially, we use a bimodal table, and a two-way global predictor to predict whether a branch will be true or not. Additionally, implementation of the path information register (PIR) and the hash access function was not required for the global predictor. To do this we make moifications to the |pm_predictor| class located in \textbf{my\_predictor.h} header file.
 
@@ -116,7 +116,7 @@ Figure \ref{fig:table_update_policy} describes our tabe update policy. We do not
 \twocolumn[
   \begin{@twocolumnfalse}
     \bibliographystyle{plain}
-    \bibliography{hw1-report}
+    \bibliography{branch-prediction-report}
   \end{@twocolumnfalse}
 ]
 

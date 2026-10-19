@@ -1,4 +1,4 @@
-issue width=4
+issue width=3
 Ld F2 0(R1)
 Mult.d F4 F2 F20
 Ld F6 0(R2)

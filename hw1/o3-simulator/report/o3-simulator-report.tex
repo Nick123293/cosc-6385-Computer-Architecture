@@ -1,0 +1,43 @@
+\documentclass[12pt, twocolumn]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath}
+\usepackage{listings} % for code
+\usepackage{xcolor} % for code
+\lstset{ %provides color for code
+    language=C++,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red},
+    identifierstyle=\color{black},
+    showstringspaces=false
+}
+\lstMakeShortInline[language=C++]| %allows inline code blocks defined with |your code|
+\usepackage{graphicx} %For including figures
+\usepackage[hidelinks]{hyperref} %Makes links clickable
+\usepackage{enumitem} %Allows [nosep] for enumerate blocks to have no link separation
+% \lstnewenvironment{cpp}
+% {
+%   \lstset{language=C++}
+% }{}
+% \lstMakeShortInline[langague=C++]
+
+% \newcommand{\cpp}[1]{%
+%   \begin{lstlisting}%
+%     #1%
+%   \end{lstlisting}%
+% }
+\begin{document}
+\twocolumn[
+  \begin{@twocolumnfalse}
+    \begin{center}
+    \textbf{\large COSC 6385 - Homework 1: Out-Of-Order (O3) Simulation} \\
+
+    Nicholas Anderson\\
+    \vspace{0.1in}
+    \end{center}
+  \end{@twocolumnfalse}
+]
+\hspace*{2cm}
+
+\end{document}

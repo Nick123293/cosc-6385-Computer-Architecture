@@ -2,85 +2,67 @@
 # 21st May 2017 
 
 from copy import deepcopy
+import argparse
+from pathlib import Path
 from collections import deque, namedtuple
-from init import read_instruction, build_rs, ld_sd_entry, ld_sd_exe, ld_sd_mem, cdb, ROB_entry, PC
-from print_status import ps, pss
+from init import build_rs, ld_sd_entry, ld_sd_exe, ld_sd_mem, cdb, ROB_entry, PC
+from input_parser import read_input
+from print_status import ps, pss, print_final_state
 from issue import issue, check_rs_space
 from exe import exe 
 from mem import mem
 from wb import wb 
 from commit import commit
 '''initialize'''
-# read instructions into a list 
-issue_width = 1 #how many instructions can be committed in one clock cycle
-instructions = []
+argument_parser = argparse.ArgumentParser(description='Run the Tomasulo simulator.')
+argument_parser.add_argument(
+    'input_file', nargs='?', type=Path,
+    default=Path(__file__).with_name('test_case.txt'),
+    help='configuration and assembly file (default: bundled test_case.txt)',
+)
+arguments = argument_parser.parse_args()
+try:
+    program = read_input(arguments.input_file)
+except (OSError, ValueError) as error:
+    argument_parser.error(str(error))
 
-for line in read_instruction('code.in'):
-  key, separator, value = line.partition('=')
-  #parse issue_width from the first line in the test cases, leave issue_width=1 if non-existent
-  if separator and key.strip().lower() == 'issue width':
-    issue_width = int(value.strip())
-  else:
-    instructions.append(line)
-
-if not 1 <= issue_width <= 4:
-  raise ValueError('Issue width must be between 1 and 4')
+instructions = program.instructions
+issue_width = program.issue_width
 '''initialize regs, RAT, memory''' 
 # integer REG
-reg_int = []
-for i in range(32):
-    reg_int.extend([0])
-reg_int[1] = 12
-reg_int[2] = 32
+reg_int = program.reg_int
 rat_int = deepcopy(reg_int)
 # fp REG
-reg_fp = []
-for i in range(32):
-    reg_fp.extend([0])
-reg_fp[20] = 3.0
+reg_fp = program.reg_fp
 rat_fp = deepcopy(reg_fp)
 # memory 
-memory = []
-for i in range(256):
-    memory.extend([0])
-memory[4] = 3.0
-memory[8] = 2.0
-memory[12] = 1.0
-memory[24] = 6.0
-memory[28] = 5.0
-memory[32] = 4.0
+memory = program.memory
 '''intialize reservation stations'''
-# 2 integer adder rs 
-size_rs_int_adder = 4 
+size_rs_int_adder = program.units['integer adder'].rs
 rs_int_adder = build_rs(size_rs_int_adder)
-# 3 fp adder rs
-size_rs_fp_adder = 3
+size_rs_fp_adder = program.units['fp adder'].rs
 rs_fp_adder = build_rs(size_rs_fp_adder)
-# 2 fp multiplier rs
-size_rs_fp_multi = 2
+size_rs_fp_multi = program.units['fp multiplier'].rs
 rs_fp_multi = build_rs(size_rs_fp_multi)
 '''initilize function unit'''
-# 1 cycle in int adder 
 fu_int_adder = deque()
-time_fu_int_adder = 1
-# 3 cycles in fp adder 
+time_fu_int_adder = program.units['integer adder'].ex_cycles
 fu_fp_adder = deque()
-time_fu_fp_adder = 4
-# 20 cycles in fp multiplier
+time_fu_fp_adder = program.units['fp adder'].ex_cycles
 fu_fp_multi = deque()
-time_fu_fp_multi = 15
+time_fu_fp_multi = program.units['fp multiplier'].ex_cycles
 '''initialize load/store queue'''
 ld_sd_queue = deque()
-size_ld_sd_queue = 5 
+size_ld_sd_queue = program.units['load/store unit'].rs
 ld_sd_exe = ld_sd_exe()
 ld_sd_exe.busy = 0
-time_ld_sd_exe = 1
+time_ld_sd_exe = program.units['load/store unit'].ex_cycles
 ld_sd_mem = ld_sd_mem()
 ld_sd_mem.busy = 0
-time_ld_sd_mem = 5
+time_ld_sd_mem = program.units['load/store unit'].mem_cycles
 '''initialize ROB'''
 ROB = deque()
-size_ROB = 64
+size_ROB = program.rob_entries
 '''initialize CDB'''
 results_buffer = deque()
 cdb = cdb()
@@ -102,7 +84,8 @@ item += 'COMMIT'.ljust(15)
 print (item)
 
 # main
-while (len(ROB)>0)|(cycle==1):
+# Drain the final memory operation before reporting the final memory values.
+while PC.PC < len(instructions) or ROB or ld_sd_mem.busy:
     
     '''ISSUE stage'''
     for _ in range(issue_width):
@@ -144,4 +127,5 @@ while (len(ROB)>0)|(cycle==1):
     
     # cycle number 
     cycle +=1  
-    
+
+print_final_state(reg_int, reg_fp, memory)
