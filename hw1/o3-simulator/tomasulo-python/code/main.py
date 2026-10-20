@@ -17,7 +17,7 @@ from commit import commit
 argument_parser = argparse.ArgumentParser(description='Run the Tomasulo simulator.')
 argument_parser.add_argument(
     'input_file', nargs='?', type=Path,
-    default=Path(__file__).with_name('test_case.txt'),
+    default=Path('../../test_cases/test_case.txt'),
     help='configuration and assembly file (default: bundled test_case.txt)',
 )
 arguments = argument_parser.parse_args()

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.10.19)  19 OCT 2026 15:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.10.19)  20 OCT 2026 13:39
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -378,8 +378,20 @@ Underfull \hbox (badness 1077) in paragraph at lines 45--46
 
 (/home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
-) [1{/home/nicholas/.local/bin/texlive/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+)
+Underfull \hbox (badness 2277) in paragraph at lines 53--54
+\OT1/cmr/m/n/12 the in-put file the struc-ture of our o3-
+ []
 
+
+Underfull \hbox (badness 1960) in paragraph at lines 53--54
+\OT1/cmr/m/n/12 A [][][][][] class is also used, which
+ []
+
+[1{/home/nicholas/.local/bin/texlive/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+] [2
 
 ] (./o3-simulator-report.aux)
  ***********
@@ -387,21 +399,21 @@ LaTeX2e <2026-06-01>
 L3 programming layer <2026-09-09>
  ***********
 Package rerunfilecheck Info: File `o3-simulator-report.out' has not changed.
-(rerunfilecheck)             Checksum: DCA1359A8F25F4D2D0A50CE7C095D2E8;285.
+(rerunfilecheck)             Checksum: FA39279B651EEF8E8B0A93D00382285A;527.
  ) 
 Here is how much of TeX's memory you used:
- 12204 strings out of 467050
- 186611 string characters out of 5401022
- 809756 words of memory out of 5000000
- 41469 multiletter control sequences out of 15000+600000
+ 12217 strings out of 467050
+ 186783 string characters out of 5401022
+ 814756 words of memory out of 5000000
+ 41479 multiletter control sequences out of 15000+600000
  630344 words of font info for 47 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,5n,79p,798b,1249s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,5n,79p,1138b,1249s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on o3-simulator-report.pdf (1 page, 47866 bytes).
+Output written on o3-simulator-report.pdf (2 pages, 54008 bytes).
 PDF statistics:
- 37 PDF objects out of 1000 (max. 8388607)
- 27 compressed objects within 1 object stream
- 4 named destinations out of 1000 (max. 500000)
- 17 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 PDF objects out of 1000 (max. 8388607)
+ 40 compressed objects within 1 object stream
+ 7 named destinations out of 1000 (max. 500000)
+ 33 words of extra memory for PDF output out of 10000 (max. 10000000)
 
