@@ -1,7 +1,9 @@
 # Fdb version 4
-["pdflatex"] 1792523442.74297 "/home/nicholas/cosc-6385-Computer-Architecture/hw1/o3-simulator/report/o3-simulator-report.tex" "o3-simulator-report.pdf" "o3-simulator-report" 1792523443.61234 0
+["pdflatex"] 1792524205.91556 "/home/nicholas/cosc-6385-Computer-Architecture/hw1/o3-simulator/report/o3-simulator-report.tex" "o3-simulator-report.pdf" "o3-simulator-report" 1792524206.90461 0
   "../results/test_case.txt_issue_width_1" 1792522732.96179 3360 8f77d5251490e301ea6a9961b4ec71f3 ""
   "../results/test_case.txt_issue_width_1.png" 1792522947.92785 56193 67e28dd43c3706f66e3f6a74a11aa8d7 ""
+  "../results/test_case.txt_issue_width_2" 1792521893.76892 3359 e18cfa75473313e5b7036a4c0f62be60 ""
+  "../results/test_case.txt_issue_width_2.png" 1792522443.03768 55391 e2aa28d3b877b372db543d2ffce3a0cc ""
   "/home/nicholas/.local/bin/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/home/nicholas/.local/bin/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
   "/home/nicholas/.local/bin/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm" 1136768653 1288 655e228510b4c2a1abe905c368440826 ""
@@ -67,10 +69,10 @@
   "/home/nicholas/.local/bin/texlive/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1792437362 5639501 341fdeb43f79c63a927c88bf66d04b7b ""
   "/home/nicholas/.local/bin/texlive/texmf-var/web2c/pdftex/pdflatex.fmt" 1792437383 3668670 8e68e14d59ad92cf09c9384c72ffe134 ""
   "/home/nicholas/.local/bin/texlive/texmf.cnf" 1792437356.77262 496 01ab80fa0036a81d2df86fb0ac70c709 ""
-  "/home/nicholas/cosc-6385-Computer-Architecture/hw1/o3-simulator/report/o3-simulator-report.tex" 1792523441.66204 5435 0b95000cd1fe7ba3617896be15e174de ""
-  "o3-simulator-report.aux" 1792523443.55398 1262 036760c2228c41ec453b5e833a23d29d "pdflatex"
-  "o3-simulator-report.out" 1792523443.55398 652 a0bb573cb9d7d25c263b4cb40601d3cb "pdflatex"
-  "o3-simulator-report.tex" 1792523441.66204 5435 0b95000cd1fe7ba3617896be15e174de ""
+  "/home/nicholas/cosc-6385-Computer-Architecture/hw1/o3-simulator/report/o3-simulator-report.tex" 1792524205.72448 6151 9841c47a1cdc37503b7ae4732def5885 ""
+  "o3-simulator-report.aux" 1792524206.84445 1259 e8215c6200fb7a5f4c8192a79c72d545 "pdflatex"
+  "o3-simulator-report.out" 1792524206.84445 652 a0bb573cb9d7d25c263b4cb40601d3cb "pdflatex"
+  "o3-simulator-report.tex" 1792524205.72448 6151 9841c47a1cdc37503b7ae4732def5885 ""
   (generated)
   "o3-simulator-report.aux"
   "o3-simulator-report.log"
