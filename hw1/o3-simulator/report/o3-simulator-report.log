@@ -1,8 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.10.19)  20 OCT 2026 13:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.10.19)  20 OCT 2026 14:10
 entering extended mode
- \write18 enabled.
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
  %&-line parsing enabled.
-**/home/nicholas/cosc-6385-Computer-Architecture/hw1/o3-simulator/report/o3-simulator-report
+**/home/nicholas/cosc-6385-Computer-Architecture/hw1/o3-simulator/report/o3-simulator-report.tex
 (/home/nicholas/cosc-6385-Computer-Architecture/hw1/o3-simulator/report/o3-simulator-report.tex
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-09-09>
@@ -391,29 +392,42 @@ Underfull \hbox (badness 1960) in paragraph at lines 53--54
 [1{/home/nicholas/.local/bin/texlive/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
 
 
-] [2
+]
+<../results/test_case.txt_issue_width_1.png, id=32, 637.63219pt x 584.93532pt>
+File: ../results/test_case.txt_issue_width_1.png Graphic file (type png)
+<use ../results/test_case.txt_issue_width_1.png>
+Package pdftex.def Info: ../results/test_case.txt_issue_width_1.png  used on input line 62.
+(pdftex.def)             Requested size: 375.80544pt x 344.7429pt.
 
-] (./o3-simulator-report.aux)
+Overfull \hbox (145.92793pt too wide) in paragraph at lines 62--63
+ [][] 
+ []
+
+File: ../results/test_case.txt_issue_width_1.png Graphic file (type png)
+<use ../results/test_case.txt_issue_width_1.png>
+Package pdftex.def Info: ../results/test_case.txt_issue_width_1.png  used on input line 69.
+(pdftex.def)             Requested size: 375.80544pt x 344.7429pt.
+[2 <../results/test_case.txt_issue_width_1.png>] [3] (./o3-simulator-report.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-09-09>
  ***********
 Package rerunfilecheck Info: File `o3-simulator-report.out' has not changed.
-(rerunfilecheck)             Checksum: FA39279B651EEF8E8B0A93D00382285A;527.
+(rerunfilecheck)             Checksum: A0BB573CB9D7D25C263B4CB40601D3CB;652.
  ) 
 Here is how much of TeX's memory you used:
- 12217 strings out of 467050
- 186783 string characters out of 5401022
- 814756 words of memory out of 5000000
- 41479 multiletter control sequences out of 15000+600000
- 630344 words of font info for 47 fonts, out of 8000000 for 9000
+ 12242 strings out of 467050
+ 187580 string characters out of 5401022
+ 814906 words of memory out of 5000000
+ 41500 multiletter control sequences out of 15000+600000
+ 630642 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 74i,5n,79p,1138b,1249s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 74i,7n,79p,1142b,1249s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on o3-simulator-report.pdf (2 pages, 54008 bytes).
+Output written on o3-simulator-report.pdf (3 pages, 98712 bytes).
 PDF statistics:
- 51 PDF objects out of 1000 (max. 8388607)
- 40 compressed objects within 1 object stream
- 7 named destinations out of 1000 (max. 500000)
- 33 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 64 PDF objects out of 1000 (max. 8388607)
+ 50 compressed objects within 1 object stream
+ 11 named destinations out of 1000 (max. 500000)
+ 46 words of extra memory for PDF output out of 10000 (max. 10000000)
 
