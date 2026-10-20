@@ -67,7 +67,7 @@ The first test case we look at is the one given to us in test\_case.txt, which h
   \item[] \textbf{Starting Memory Values:} Mem[4]=3.0, Mem[8]=2.0, Mem[12]=1.0, Mem[24]=6.0, Mem[28]=5.0, Mem[32]=4.0
 \end{enumerate}
 
-The results of changing the issue width between 1,2,3, and 4 can be seen in figures \ref{fig:tc_iw1}, \ref{fig:tc_iw2}, \ref{fig:tc_iw3}
+The results of changing the issue width between 1,2,3, and 4 can be seen in figures \ref{fig:tc_iw1}, \ref{fig:tc_iw2}, \ref{fig:tc_iw3}, and \ref{fig:tc_iw4}. The main findings are that increasing issue width cannot increase the cycle of the final commit, however it can increase the cycle of intermediate commits. This is due to the way pipelining is implemented. Since EXE comes before MEM, instructions which do not require MEM will perform the WB step first since they are put into the results buffer during the |exe(...)| function call. Since the first instrution is a load operation, if non load/store instructions finish the EXE step on the same cycle that it finishes its MEM step, the non load/store instructions are placed into the results buffer first. This occurs when the issue width is 1, 3, and 4. Addi instructions finish the EXE stage on the same cycle which instruction 1 finishes its MEM stage. Since the Addi instructions (specifically their results) are placed into the results buffer first, they perform the WB stage first. Since only one instruction can perform the WB stage at one time, this means the first instruction has to wait for a later cycle. We can see by looking at \ref{fig:tc_iw2} that an issue width of 2 avoids this, since instruction 6 finishes before cycle 7 (when instruction 1 finishes its MEM stage), and instructions 10 and 11 are not issued quickly enough to finish on cycle 7, the first instruction can perform the WB stage in the cycle directly after it finishes its MEM step.
 
 \begin{figure*}[htbp]
     \centering % Centers the image on the page
@@ -86,5 +86,11 @@ The results of changing the issue width between 1,2,3, and 4 can be seen in figu
     \includegraphics[width=.8\textwidth]{../results/test_case.txt_issue_width_3} % Do not include the file extension (.png/.jpg)
     \caption{Results from test\_case.txt with an issue width of 3.}
     \label{fig:tc_iw3} % Used to reference this image in the text
+\end{figure*}
+\begin{figure*}[htbp]
+    \centering % Centers the image on the page
+    \includegraphics[width=.8\textwidth]{../results/test_case.txt_issue_width_4} % Do not include the file extension (.png/.jpg)
+    \caption{Results from test\_case.txt with an issue width of 4.}
+    \label{fig:tc_iw4} % Used to reference this image in the text
 \end{figure*}
 \end{document}

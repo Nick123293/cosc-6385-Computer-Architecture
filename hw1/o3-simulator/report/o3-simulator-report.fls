@@ -174,6 +174,13 @@ INPUT ../results/test_case.txt_issue_width_3.png
 INPUT ../results/test_case.txt_issue_width_3.png
 INPUT ../results/test_case.txt_issue_width_3.png
 INPUT ../results/test_case.txt_issue_width_3.png
+INPUT ../results/test_case.txt_issue_width_4
+INPUT ../results/test_case.txt_issue_width_4
+INPUT ../results/test_case.txt_issue_width_4
+INPUT ../results/test_case.txt_issue_width_4.png
+INPUT ../results/test_case.txt_issue_width_4.png
+INPUT ../results/test_case.txt_issue_width_4.png
+INPUT ../results/test_case.txt_issue_width_4.png
 INPUT o3-simulator-report.aux
 INPUT ./o3-simulator-report.out
 INPUT ./o3-simulator-report.out
