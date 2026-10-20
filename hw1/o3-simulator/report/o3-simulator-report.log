@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.10.19)  20 OCT 2026 14:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.10.19)  20 OCT 2026 15:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -402,19 +402,24 @@ Underfull \hbox (badness 2088) in paragraph at lines 67--68
 \OT1/cmr/m/n/12 Mem[8]=2.0, Mem[12]=1.0, Mem[24]=6.0,
  []
 
-<../results/test_case.txt_issue_width_1.png, id=34, 637.63219pt x 584.93532pt>
+<../results/test_case.txt_issue_width_1.png, id=35, 637.63219pt x 584.93532pt>
 File: ../results/test_case.txt_issue_width_1.png Graphic file (type png)
 <use ../results/test_case.txt_issue_width_1.png>
 Package pdftex.def Info: ../results/test_case.txt_issue_width_1.png  used on input line 74.
 (pdftex.def)             Requested size: 375.80544pt x 344.7429pt.
-<../results/test_case.txt_issue_width_2.png, id=36, 633.11531pt x 584.1825pt>
+<../results/test_case.txt_issue_width_2.png, id=37, 633.11531pt x 584.1825pt>
 File: ../results/test_case.txt_issue_width_2.png Graphic file (type png)
 <use ../results/test_case.txt_issue_width_2.png>
 Package pdftex.def Info: ../results/test_case.txt_issue_width_2.png  used on input line 80.
 (pdftex.def)             Requested size: 375.80544pt x 346.76836pt.
+<../results/test_case.txt_issue_width_3.png, id=38, 645.16031pt x 583.42969pt>
+File: ../results/test_case.txt_issue_width_3.png Graphic file (type png)
+<use ../results/test_case.txt_issue_width_3.png>
+Package pdftex.def Info: ../results/test_case.txt_issue_width_3.png  used on input line 86.
+(pdftex.def)             Requested size: 375.80544pt x 339.84055pt.
 [2
 
-] [3 <../results/test_case.txt_issue_width_1.png>] [4 <../results/test_case.txt_issue_width_2.png>] (./o3-simulator-report.aux)
+] [3 <../results/test_case.txt_issue_width_1.png>] [4 <../results/test_case.txt_issue_width_2.png>] [5 <../results/test_case.txt_issue_width_3.png>] (./o3-simulator-report.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-09-09>
@@ -423,18 +428,18 @@ Package rerunfilecheck Info: File `o3-simulator-report.out' has not changed.
 (rerunfilecheck)             Checksum: A0BB573CB9D7D25C263B4CB40601D3CB;652.
  ) 
 Here is how much of TeX's memory you used:
- 12260 strings out of 467050
- 188301 string characters out of 5401022
- 814906 words of memory out of 5000000
- 41517 multiletter control sequences out of 15000+600000
+ 12275 strings out of 467050
+ 188904 string characters out of 5401022
+ 814979 words of memory out of 5000000
+ 41530 multiletter control sequences out of 15000+600000
  630642 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,6n,79p,1142b,1249s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on o3-simulator-report.pdf (4 pages, 144646 bytes).
+Output written on o3-simulator-report.pdf (5 pages, 188960 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
- 55 compressed objects within 1 object stream
- 12 named destinations out of 1000 (max. 500000)
- 51 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 81 PDF objects out of 1000 (max. 8388607)
+ 61 compressed objects within 1 object stream
+ 14 named destinations out of 1000 (max. 500000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
