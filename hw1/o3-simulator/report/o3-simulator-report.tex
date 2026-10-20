@@ -53,5 +53,21 @@ Expanding issue with for commits as well is done through the |commit| function i
 An input parser is used to be read from the input file the structure of our o3-simulator, that being the number of RS' for each instruction type (integer adder, FP adder/multiplier, and load/stores), The number of cycles each FU takes to execute and store in memory (memory is only impacted by load/store instructions, all other instructions take 0 cycles in the MEM pipeline stage), number of ROB entries, the issue width, and initial memory and register values. This is implemented in input\_parser.py though standard parser methods (i.e. reading the input line by line and using regular expressions to parse values). Parsed values are placed into the |SimulationInput|. A |UnitConfig| class is also used, which |SimulationInput| derives values from to save the full information of the program. A |SimulationInput| instance is returned to main through |read_input(filename)| (function in input\_parser.py) containing all the information required to run the simulation with the parameters given in the input file.
 
 \section{Test Cases/Results}
-All test cases and results can be found in "test\_cases" and "results" directories located in `hw1/o3-simulator/`. The first test case we look at is the one given to us in test\_case.txt.
+All test cases and results can be found in "test\_cases" and "results" directories located in `hw1/o3-simulator/`. 
+
+\subsection{test\_case.txt}
+The first test case we look at is the one given to us in test\_case.txt, which has the following parameters for the input:
+\begin{figure}[htbp]
+    \centering % Centers the image on the page
+    \includegraphics[width=.8\textwidth]{../results/test_case.txt_issue_width_1} % Do not include the file extension (.png/.jpg)
+    \caption{Results from test\_case.txt with an issue width of 1.}
+    \label{fig:tc_params} % Used to reference this image in the text
+\end{figure}
+
+\begin{figure*}[htbp]
+    \centering % Centers the image on the page
+    \includegraphics[width=.8\textwidth]{../results/test_case.txt_issue_width_1} % Do not include the file extension (.png/.jpg)
+    \caption{Results from test\_case.txt with an issue width of 1.}
+    \label{fig:tc_iw1} % Used to reference this image in the text
+\end{figure*}
 \end{document}
