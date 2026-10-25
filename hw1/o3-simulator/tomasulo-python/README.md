@@ -44,3 +44,20 @@ existing instructions and branch-offset convention.
 After the instruction timing table, output lists all integer and FP registers
 and nonzero memory values with their byte addresses. A final store is allowed to
 finish before memory is printed. Issue width also controls commit width.
+
+Instructions retire from the ROB head in program order, up to the commit width.
+Every COMMIT timestamp is the actual retirement cycle, including branches and
+stores. ALU instructions and loads retire no earlier than the cycle after WB;
+branches retire no earlier than the cycle after EX finishes.
+
+A store starts its memory access only at the ROB head with a ready address and
+data. It stays in the ROB and load/store queue throughout the configured memory
+latency. MEM marks the access complete; COMMIT writes memory and removes the
+store from both queues. Younger loads may forward from queued older stores or
+access memory past stores with known, nonmatching addresses.
+
+Run the retirement and memory-ordering regression checks from `code`:
+
+```sh
+python -B -m unittest -v test_commit_order.py
+```

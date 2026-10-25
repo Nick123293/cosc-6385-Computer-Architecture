@@ -123,7 +123,8 @@ while PC.PC < len(instructions) or ROB or ld_sd_mem.busy:
         results_buffer) 
     
     '''COMMIT stage'''
-    commit(ROB, reg_int, reg_fp, cycle, instructions, issue_width)
+    commit(ROB, reg_int, reg_fp, cycle, instructions, issue_width,
+           ld_sd_queue=ld_sd_queue, memory=memory)
     
     # cycle number 
     cycle +=1  

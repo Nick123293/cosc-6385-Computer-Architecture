@@ -25,7 +25,7 @@ def modify_arch_reg(entry, reg_int, reg_fp):
 
 # function: commit
 def commit(ROB, reg_int, reg_fp, cycle, instructions,
-           commit_width=1):
+           commit_width=1, ld_sd_queue=None, memory=None):
 
     for _ in range(commit_width):
         if not ROB:
@@ -36,21 +36,28 @@ def commit(ROB, reg_int, reg_fp, cycle, instructions,
 
         if op == 'Bne':
             # EX records both its starting and finishing cycles.
-            if len(entry.exe) < 2:
+            if len(entry.exe) < 2 or entry.exe[-1] >= cycle:
                 break
 
         elif op == 'Sd':
-            # Preserve the simulator's existing store-ready marker.
-            if not entry.commit:
+            # MEM completes the access; only retirement changes memory.
+            if not entry.store_complete:
                 break
+            if ld_sd_queue is None or memory is None:
+                raise ValueError('store retirement requires the load/store queue and memory')
+            if not ld_sd_queue or ld_sd_queue[0].dest_tag != entry.ROB_tag:
+                raise RuntimeError('retiring store must be at the load/store queue head')
+            store = ld_sd_queue[0]
+            memory[store.address] = store.data
+            ld_sd_queue.popleft()
 
         else:
             # ALU instructions and loads must have broadcast.
-            if not entry.cdb:
+            if not entry.cdb or entry.cdb[-1] >= cycle:
                 break
 
-            entry.commit.append(cycle + 1)
             modify_arch_reg(entry, reg_int, reg_fp)
 
+        entry.commit.append(cycle)
         ROB.popleft()
         print_ROB(entry, instructions)

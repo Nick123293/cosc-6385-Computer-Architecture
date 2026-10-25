@@ -41,13 +41,14 @@ def cdb():
     return temp
 # ROB_entry 
 def ROB_entry():
-    ROB_entry = namedtuple('ROB_entry', 'ROB_tag, PC, value, dest_tag, issue, exe, mem, cdb, commit')
+    ROB_entry = namedtuple('ROB_entry', 'ROB_tag, PC, value, dest_tag, issue, exe, mem, cdb, commit, store_complete')
     temp = ROB_entry
     temp.issue = []
     temp.exe = []
     temp.mem = []
     temp.cdb = []
     temp.commit =[]
+    temp.store_complete = False
     return temp
 # PC 
 def PC():
