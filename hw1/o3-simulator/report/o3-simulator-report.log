@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.10.19)  20 OCT 2026 15:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.10.19)  25 OCT 2026 14:34
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -172,6 +172,8 @@ Package graphics Info: Driver file: pdftex.def on input line 106.
 )
 \Gin@req@height=\dimen172
 \Gin@req@width=\dimen173
+) (/home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/placeins/placeins.sty
+Package: placeins 2005/04/18  v 2.2
 ) (/home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2026-10-09 v7.01s Hypertext links for LaTeX
  (/home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
@@ -278,30 +280,38 @@ Package: enumitem 2025/02/06 v3.11 Customized lists
 \enit@inbox=\box57
 \enit@count@id=\count319
 \enitdp@description=\count320
+) (/home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2026/08/13 4.7 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count321
+\FV@InFile=\read2
+\FV@TabBox=\box58
+\c@FancyVerbLine=\count322
+\FV@StepNumber=\count323
+\FV@OutFile=\write3
 ) (/home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/l3kernel/l3backend-pdftex.def
 File: l3backend-pdftex.def 2026-09-09 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count321
+\l__color_backend_stack_int=\count324
 ) (./o3-simulator-report.aux)
 \openout1 = `o3-simulator-report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 30.
-LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 32.
+LaTeX Font Info:    ... okay on input line 32.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -337,19 +347,19 @@ LaTeX Font Info:    ... okay on input line 30.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count322
+\c@lstlisting=\count325
 (/home/nicholas/.local/bin/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count323
+\scratchcounter=\count326
 \scratchdimen=\dimen179
-\scratchbox=\box58
-\nofMPsegments=\count324
-\nofMParguments=\count325
+\scratchbox=\box59
+\nofMPsegments=\count327
+\nofMParguments=\count328
 \everyMPshowfont=\toks26
-\MPscratchCnt=\count326
+\MPscratchCnt=\count329
 \MPscratchDim=\dimen180
-\MPnumerator=\count327
-\makeMPintoPDFobject=\count328
+\MPnumerator=\count330
+\makeMPintoPDFobject=\count331
 \everyMPtoPDFconversion=\toks27
 ) (/home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
@@ -357,35 +367,35 @@ Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 48
  (/home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 30.
+Package hyperref Info: Link coloring OFF on input line 32.
  (./o3-simulator-report.out) (./o3-simulator-report.out)
-\@outlinefile=\write3
-\openout3 = `o3-simulator-report.out'.
+\@outlinefile=\write4
+\openout4 = `o3-simulator-report.out'.
 
 
-Underfull \hbox (badness 1097) in paragraph at lines 43--44
+Underfull \hbox (badness 1097) in paragraph at lines 45--46
 \OT1/cmr/m/n/12 For this as-sign-ment we were given sam-
  []
 
 
-Underfull \hbox (badness 1454) in paragraph at lines 43--44
+Underfull \hbox (badness 1454) in paragraph at lines 45--46
 \OT1/cmr/m/n/12 ple python code which sim-u-lates out of
  []
 
 
-Underfull \hbox (badness 1077) in paragraph at lines 45--46
+Underfull \hbox (badness 1077) in paragraph at lines 47--48
 []\OT1/cmr/m/n/12 Additionally the in-put and out-put de-
  []
 
 (/home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2025/11/14 1.11b listings language file
 )
-Underfull \hbox (badness 2277) in paragraph at lines 53--54
+Underfull \hbox (badness 2277) in paragraph at lines 55--56
 \OT1/cmr/m/n/12 the in-put file the struc-ture of our o3-
  []
 
 
-Underfull \hbox (badness 1960) in paragraph at lines 53--54
+Underfull \hbox (badness 1960) in paragraph at lines 55--56
 \OT1/cmr/m/n/12 A [][][][][] class is also used, which
  []
 
@@ -393,56 +403,69 @@ Underfull \hbox (badness 1960) in paragraph at lines 53--54
 
 
 ]
-Underfull \hbox (badness 5446) in paragraph at lines 66--67
+Underfull \hbox (badness 5446) in paragraph at lines 68--69
 []\OT1/cmr/bx/n/12 Starting Reg-is-ter Val-ues: \OT1/cmr/m/n/12 R1=12,
  []
 
 
-Underfull \hbox (badness 2088) in paragraph at lines 67--68
+Underfull \hbox (badness 2088) in paragraph at lines 69--70
 \OT1/cmr/m/n/12 Mem[8]=2.0, Mem[12]=1.0, Mem[24]=6.0,
  []
 
-<../results/test_case.txt_issue_width_1.png, id=37, 637.63219pt x 584.93532pt>
+
+Underfull \hbox (badness 5446) in paragraph at lines 82--83
+[]\OT1/cmr/bx/n/12 Starting Reg-is-ter Val-ues: \OT1/cmr/m/n/12 R4=10,
+ []
+
+[2] [3
+
+]
+<../results/test_case.txt_issue_width_1.png, id=71, 637.63219pt x 584.93532pt>
 File: ../results/test_case.txt_issue_width_1.png Graphic file (type png)
 <use ../results/test_case.txt_issue_width_1.png>
-Package pdftex.def Info: ../results/test_case.txt_issue_width_1.png  used on input line 74.
+Package pdftex.def Info: ../results/test_case.txt_issue_width_1.png  used on input line 94.
 (pdftex.def)             Requested size: 375.80544pt x 344.7429pt.
-<../results/test_case.txt_issue_width_2.png, id=39, 633.11531pt x 584.1825pt>
+<../results/test_case.txt_issue_width_2.png, id=73, 633.11531pt x 584.1825pt>
 File: ../results/test_case.txt_issue_width_2.png Graphic file (type png)
 <use ../results/test_case.txt_issue_width_2.png>
-Package pdftex.def Info: ../results/test_case.txt_issue_width_2.png  used on input line 80.
+Package pdftex.def Info: ../results/test_case.txt_issue_width_2.png  used on input line 100.
 (pdftex.def)             Requested size: 375.80544pt x 346.76836pt.
-<../results/test_case.txt_issue_width_3.png, id=40, 645.16031pt x 583.42969pt>
+<../results/test_case.txt_issue_width_3.png, id=74, 645.16031pt x 583.42969pt>
 File: ../results/test_case.txt_issue_width_3.png Graphic file (type png)
 <use ../results/test_case.txt_issue_width_3.png>
-Package pdftex.def Info: ../results/test_case.txt_issue_width_3.png  used on input line 86.
+Package pdftex.def Info: ../results/test_case.txt_issue_width_3.png  used on input line 106.
 (pdftex.def)             Requested size: 375.80544pt x 339.84055pt.
-<../results/test_case.txt_issue_width_4.png, id=41, 640.64343pt x 583.42969pt>
+<../results/test_case.txt_issue_width_4.png, id=75, 640.64343pt x 583.42969pt>
 File: ../results/test_case.txt_issue_width_4.png Graphic file (type png)
 <use ../results/test_case.txt_issue_width_4.png>
-Package pdftex.def Info: ../results/test_case.txt_issue_width_4.png  used on input line 92.
+Package pdftex.def Info: ../results/test_case.txt_issue_width_4.png  used on input line 112.
 (pdftex.def)             Requested size: 375.80544pt x 342.24419pt.
-[2] [3 <../results/test_case.txt_issue_width_1.png>] [4 <../results/test_case.txt_issue_width_2.png>] [5 <../results/test_case.txt_issue_width_3.png>] [6 <../results/test_case.txt_issue_width_4.png>] (./o3-simulator-report.aux)
+ [4
+
+ <../results/test_case.txt_issue_width_1.png>] [5 <../results/test_case.txt_issue_width_2.png>] [6 <../results/test_case.txt_issue_width_3.png>] [7 <../results/test_case.txt_issue_width_4.png>] [8] [9]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [10] [11] (./o3-simulator-report.aux)
  ***********
 LaTeX2e <2026-06-01>
 L3 programming layer <2026-09-09>
  ***********
 Package rerunfilecheck Info: File `o3-simulator-report.out' has not changed.
-(rerunfilecheck)             Checksum: A0BB573CB9D7D25C263B4CB40601D3CB;652.
+(rerunfilecheck)             Checksum: 09EA16D7958496E2CBB591EF9BD56795;1579.
  ) 
 Here is how much of TeX's memory you used:
- 12292 strings out of 467050
- 189523 string characters out of 5401022
- 815052 words of memory out of 5000000
- 41545 multiletter control sequences out of 15000+600000
- 630642 words of font info for 48 fonts, out of 8000000 for 9000
+ 12725 strings out of 467050
+ 196697 string characters out of 5401022
+ 845912 words of memory out of 5000000
+ 41955 multiletter control sequences out of 15000+600000
+ 631109 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  74i,6n,79p,1652b,1249s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on o3-simulator-report.pdf (6 pages, 234494 bytes).
+</home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on o3-simulator-report.pdf (11 pages, 252713 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
- 67 compressed objects within 1 object stream
- 16 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 142 PDF objects out of 1000 (max. 8388607)
+ 111 compressed objects within 2 object streams
+ 26 named destinations out of 1000 (max. 500000)
+ 101 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -69,6 +69,8 @@ INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/graphics/trig.sty
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/placeins/placeins.sty
+INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/placeins/placeins.sty
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
@@ -120,6 +122,8 @@ INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/generic/uniquecounter/uni
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
+INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/l3kernel/l3backend-pdftex.def
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/tex/latex/l3kernel/l3backend-pdftex.def
 INPUT ./o3-simulator-report.aux
@@ -181,9 +185,14 @@ INPUT ../results/test_case.txt_issue_width_4.png
 INPUT ../results/test_case.txt_issue_width_4.png
 INPUT ../results/test_case.txt_issue_width_4.png
 INPUT ../results/test_case.txt_issue_width_4.png
+INPUT /home/nicholas/.local/bin/texlive/texmf-dist/fonts/tfm/public/cm/cmr8.tfm
+INPUT /home/nicholas/.local/bin/texlive/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm
+INPUT ../results/test_case2_issue_width_1.txt
+INPUT ../results/test_case2_issue_width_4.txt
 INPUT o3-simulator-report.aux
 INPUT ./o3-simulator-report.out
 INPUT ./o3-simulator-report.out
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb
 INPUT /home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
+INPUT /home/nicholas/.local/bin/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb

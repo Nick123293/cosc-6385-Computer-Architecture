@@ -14,8 +14,10 @@
 }
 \lstMakeShortInline[language=Python]| %allows inline code blocks defined with |your code|
 \usepackage{graphicx} %For including figures
+\usepackage{placeins} %For using \FloatBarrier
 \usepackage[hidelinks]{hyperref} %Makes links clickable
 \usepackage{enumitem} %Allows [nosep] for enumerate blocks to have no link separation
+\usepackage{fancyvrb} %For inputting text files
 % \lstnewenvironment{cpp}
 % {
 %   \lstset{language=C++}
@@ -69,6 +71,24 @@ The first test case we look at is the one given to us in test\_case.txt, which h
 
 The results of changing the issue width between 1,2,3, and 4 can be seen in figures \ref{fig:tc_iw1}, \ref{fig:tc_iw2}, \ref{fig:tc_iw3}, and \ref{fig:tc_iw4}. The main findings are that increasing issue width cannot increase the cycle of the final commit, however it can increase the cycle of intermediate commits. This is due to the way pipelining is implemented. Since EXE comes before MEM, instructions which do not require MEM will perform the WB step first since they are put into the results buffer during the |exe(...)| function call. Since the first instrution is a load operation, if non load/store instructions finish the EXE step on the same cycle that it finishes its MEM step, the non load/store instructions are placed into the results buffer first. This occurs when the issue width is 1, 3, and 4. Addi instructions finish the EXE stage on the same cycle which instruction 1 finishes its MEM stage. Since the Addi instructions (specifically their results) are placed into the results buffer first, they perform the WB stage first. Since only one instruction can perform the WB stage at one time, this means the first instruction has to wait for a later cycle. We can see by looking at \ref{fig:tc_iw2} that an issue width of 2 avoids this, since instruction 6 finishes before cycle 7 (when instruction 1 finishes its MEM stage), and instructions 10 and 11 are not issued quickly enough to finish on cycle 7, the first instruction can perform the WB stage in the cycle directly after it finishes its MEM step.
 
+\subsection{test\_case2.txt}
+In this case we stress test all portions of the o3 simulator to make sure that everything is working correctly. In total there are 73 instructions issued, memory loads and stores, all FUs and instruction types are used. The hardware configuration is given like so:
+\begin{enumerate}[nosep, wide, labelindent=0pt]
+  \item[] \textbf{Int. Adder:} 2 RS, 1 Cycle in EX, 1 FU
+  \item[] \textbf{FP Adder:} 2 RS, 3 Cycles in EX, 1 FU
+  \item[] \textbf{FP Mult.:} 2 RS, 15 Cycles in EX, 1 FU
+  \item[] \textbf{Load/Store:} 3 RS, 1 Cycle in EX, 1 Cycles in Mem, 1 FU
+  \item[] \textbf{ROB Entries:} 28
+  \item[] \textbf{Starting Register Values:} R4=10, R5=3, R15=2, F1=2.0, F2=3.0, F3=4.0, F4=5.0, F5=6.0, F6=7.0, F7=8.0
+  \item[] \textbf{Starting Memory Values:} Mem[0]=10.0, Mem[4]=20.0, Mem[8]=30.0, Mem[12]=40.0
+\end{enumerate}
+
+As the outputs are extremely long, I have included the output for an issue width of 1 and 4 in the Appendix sections \ref{sec:A1} and \ref{sec:A2} respectively. In this example again we can see that similarly to the previous test case, increasing the issue width allows for faster execution. With an issue width of 1 execution takes 130 cycles, whereas with an issue width of 4 execution takes only 105 cycles while resulting in the same final register and non-zero memory values. 
+
+\FloatBarrier
+\onecolumn
+\section{Appendix}
+\subsection{test\_case.txt figues}
 \begin{figure*}[htbp]
     \centering % Centers the image on the page
     \includegraphics[width=.8\textwidth]{../results/test_case.txt_issue_width_1} % Do not include the file extension (.png/.jpg)
@@ -93,4 +113,10 @@ The results of changing the issue width between 1,2,3, and 4 can be seen in figu
     \caption{Results from test\_case.txt with an issue width of 4.}
     \label{fig:tc_iw4} % Used to reference this image in the text
 \end{figure*}
+\FloatBarrier
+\subsection{test\_case2.txt output with issue width 1}\label{sec:A1}
+\VerbatimInput[fontsize=\scriptsize, baselinestretch=1.0, tabsize=1]{../results/test_case2_issue_width_1.txt}
+\subsection{test\_case2.txt output with issue width 4}\label{sec:A2}
+\VerbatimInput[fontsize=\scriptsize, baselinestretch=1.0, tabsize=1]{../results/test_case2_issue_width_4.txt}
+
 \end{document}
